@@ -1,0 +1,137 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Ms. Yen || Happy Birthday</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="page-loader">
+      <div class="page-loader-inner">
+        <span class="loader"></span>
+      </div>
+    </div>
+    <div class="cursor"></div>
+    <div class="model">
+      <!--START TOP BALLONS-->
+<button class="close-model" onclick="openModel();">Close</button>
+      <!-- END TOP BALLONS -->
+      <div class="cake">
+        <div class="plate"></div>
+        <div class="layer layer-bottom"></div>
+        <div class="layer layer-middle"></div>
+        <div class="layer layer-top"></div>
+        <div class="icing"></div>
+        <div class="drip drip1"></div>
+        <div class="drip drip2"></div>
+        <div class="drip drip3"></div>
+        <div class="candle">
+          <div class="flame"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="imgBox">
+        <img src="./c-Yen-1.jpg" alt="" />
+        <img src="./c-Yen-2.jpg" alt="" />
+      </div>
+
+      <a class="button" href="#" onclick="openCard()"
+        >Open Now<span
+          class="button-mask button-slides slides-left Graident-one"
+        ></span
+      ></a>
+      <div class="details">
+        <div class="content">
+          <!--text start-->
+          <div class="text">
+            <span>Sep</span>
+            <span>02</span>
+            <span>1998</span>
+            <span>!</span>
+          </div>
+          <!--text end-->
+          <h2>
+            <br />
+            <span> Ms. Yen" 18 years old" </span>
+          </h2>
+          <p>
+            "Always keep a shining smile . And remember to have a great
+            birthday! "
+          </p>
+
+          <button class="bubbly-button" onclick="openModel();">
+            Cake Here !
+          </button>
+        </div>
+      </div>
+    </div>
+    <canvas id="my-canvas"></canvas>
+    <script src="./confetti.min.js"></script>
+    <script>
+      function openCard() {
+        document.querySelector(".card").classList.toggle("active");
+        document.querySelector(".button").style.display = "none";
+        var confettiElement = document.getElementById("my-canvas");
+        var confettiSettings = { target: confettiElement };
+        var confetti = new ConfettiGenerator(confettiSettings);
+        confetti.render();
+      }
+      function openModel() {
+        document.querySelector(".model").classList.toggle("active");
+      }
+      var animateButton = function (e) {
+        e.preventDefault;
+        //reset animation
+        e.target.classList.remove("animate");
+
+        e.target.classList.add("animate");
+        setTimeout(function () {
+          e.target.classList.remove("animate");
+        }, 700);
+      };
+
+      var bubblyButtons = document.getElementsByClassName("bubbly-button");
+
+      for (var i = 0; i < bubblyButtons.length; i++) {
+        bubblyButtons[i].addEventListener("click", animateButton, false);
+      }
+      const cursor = document.querySelector(".cursor");
+      var timeout;
+
+      //follow cursor on mousemove
+      document.addEventListener("mousemove", (e) => {
+        let x = e.pageX;
+        let y = e.pageY;
+
+        cursor.style.top = y + "px";
+        cursor.style.left = x + "px";
+        cursor.style.display = "block";
+
+        //cursor effects when mouse stopped
+        function mouseStopped() {
+          cursor.style.display = "none";
+        }
+        clearTimeout(timeout);
+        timeout = setTimeout(mouseStopped, 1000);
+      });
+
+      //cursor effects when mouseout
+      document.addEventListener("mouseout", () => {
+        cursor.style.display = "none";
+      });
+
+      window.addEventListener("load", () => {
+        document.querySelector(".page-loader").classList.add("slide-out-right");
+        setTimeout(() => {
+          document.querySelector(".page-loader").style.display = "none";
+        }, 1500);
+      });
+    </script>
+  </body>
+</html>
